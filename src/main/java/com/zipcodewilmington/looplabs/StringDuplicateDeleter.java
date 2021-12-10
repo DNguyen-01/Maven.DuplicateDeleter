@@ -21,7 +21,7 @@ public final class StringDuplicateDeleter extends DuplicateDeleter<String> {
         //array -> stream
 
        return Arrays.stream(array)
-                //get number of occurence
+
                 .filter(stringElement -> stringElement.equals(string))
                 .count();
 
