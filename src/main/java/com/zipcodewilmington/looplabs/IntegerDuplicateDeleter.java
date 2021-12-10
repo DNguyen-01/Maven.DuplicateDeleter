@@ -1,8 +1,51 @@
 package com.zipcodewilmington.looplabs;
 
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 /**
  * Created by leon on 1/29/18.
  * @ATTENTION_TO_STUDENTS You are forbidden from modifying the signature of this class.
  */
 public final class IntegerDuplicateDeleter extends DuplicateDeleter<Integer> {
+
+    public IntegerDuplicateDeleter(Integer[] intArray) {
+        super(intArray);
+    }
+
+    public long getOccurrence(int occurrence){
+
+       return Arrays.stream(array)
+                .filter(anotherNumber -> anotherNumber == occurrence)
+                .count();
+
+    }
+
+    @Override
+    public Integer[] removeDuplicates(int maxNumberOfDuplications) {
+
+        //given a sorted array
+        //given maxNumberOfDuplications
+        //compare the first number with the adjacent number
+
+        //turned an array into a stream
+        return Arrays.stream(array)
+                //filter thru our stream -> new variable condition to check our method call (duplicate numbers)
+                .filter(duplicateNumber -> getOccurrence(duplicateNumber) < maxNumberOfDuplications)
+                //convert the stream back to a new Array.
+                .toArray(Integer[]::new);
+    }
+
+    @Override
+    public Integer[] removeDuplicatesExactly(int exactNumberOfDuplications) {
+
+
+        return Arrays.stream(array)
+                .filter(exactNumberOfOccurrence -> getOccurrence(exactNumberOfOccurrence) != exactNumberOfDuplications)
+                .toArray(Integer[]::new);
+
+    }
+
+
 }
